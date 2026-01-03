@@ -18,7 +18,7 @@ class AddEditCoffeeForm(QDialog):
         self.buttonBox.rejected.connect(self.reject)
 
     def load_coffee_data(self):
-        connection = sqlite3.connect('coffee.sqlite')
+        connection = sqlite3.connect('coffee.sql')
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM coffee WHERE id = ?", (self.coffee_id,))
         record = cursor.fetchone()
