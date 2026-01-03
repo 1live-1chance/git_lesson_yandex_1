@@ -39,19 +39,19 @@ class AddEditCoffeeForm(QDialog):
         price = self.priceSpinBox.value()
         volume = self.volumeSpinBox.value()
 
-        connection = sqlite3.connect('coffee.sqlite')
+        connection = sqlite3.connect('coffee.sql')
         cursor = connection.cursor()
 
         if self.coffee_id:
             cursor.execute("""
                 UPDATE coffee
-                SET name = ?, roast_level = ?, grind_type = ?,
-                    flavor_description = ?, price = ?, package_volume = ?
+                SET [название сорта] = ?, [степень обжарки] = ?, [тип ] = ?,
+                    [описание вкуса] = ?, [цена ] = ?, [объём упаковки] = ?
                 WHERE id = ?
             """, (name, roast, coffee_type, description, price, volume, self.coffee_id))
         else:
             cursor.execute("""
-                INSERT INTO coffee (name, roast_level, grind_type, flavor_description, price, package_volume)
+                           INSERT INTO coffee ([название сорта], [степень обжарки], [тип ], [описание вкуса], [цена ], [объём упаковки])
                 VALUES (?, ?, ?, ?, ?, ?)
             """, (name, roast, coffee_type, description, price, volume))
 
